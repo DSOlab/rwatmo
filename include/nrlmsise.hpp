@@ -152,6 +152,22 @@ public:
           "[ERROR] NrlmsiseDataHunter not setup, cannot compute density!\n");
   }
 
+  /* --> ONLY FOR DEBUGGING !! */
+  double density_debug(Eigen::Vector3d rsat, const dso::MjdEpoch &tt,
+                                const dso::Msise00Data &data,
+                                double &lon, double &lat, double &alt,
+                                double *densities_out,
+                                double *temperatures_out
+                                );
+  double density_debug(Eigen::Vector3d rsat_ecef, const dso::MjdEpoch &tt, double &lon, double &lat, double &alt, double *densities_out, double *temperatures_out) {
+    if (mhunter)
+      return density_debug(rsat_ecef, tt, mhunter->get_data(tt), lon, lat, alt, densities_out, temperatures_out);
+    else
+      throw std::runtime_error(
+          "[ERROR] NrlmsiseDataHunter not setup, cannot compute density!\n");
+  }
+  /* ONLY FOR DEBUGGING !! <-- */
+
   NrlmsiseDataHunter &
   setup_data_hunter(const std::vector<SpaceWeatherData> &data) {
     if (mhunter)
