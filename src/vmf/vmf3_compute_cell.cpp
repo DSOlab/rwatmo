@@ -84,9 +84,9 @@ int dso::Vmf3SiteHandler::vmf3_impl(const char *site, const dso::MjdEpoch &t,
              res[node].mfw());
 
     /* Apply Niell (1996) height correction to the hydrostatic mapping */
-    const double aht = 2.53e0 - 5;
-    const double bht = 5.49e0 - 3;
-    const double cht = 1.14e0 - 3;
+    const double aht = 2.53e-5;
+    const double bht = 5.49e-3;
+    const double cht = 1.14e-3;
     const double sel = std::sin(el);
     const double nmfh = (1 + (aht / (1 + bht / (1 + cht)))) /
                         (sel + (aht / (sel + bht / (sel + cht))));
